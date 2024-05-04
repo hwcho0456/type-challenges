@@ -18,7 +18,10 @@
 
 /* _____________ 여기에 코드 입력 _____________ */
 
-type Trim<S extends string> = any
+type Space = ' ' | '\t' | '\n'
+type TrimLeft<S extends string> = S extends `${Space}${infer R}` ? TrimLeft<R> : S
+type TrimRight<S extends string> = S extends `${infer R}${Space}` ? TrimRight<R> : S
+type Trim<S extends string> = TrimRight<TrimLeft<S>>
 
 /* _____________ 테스트 케이스 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

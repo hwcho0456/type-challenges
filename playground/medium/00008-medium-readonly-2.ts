@@ -32,7 +32,11 @@
 
 /* _____________ 여기에 코드 입력 _____________ */
 
-type MyReadonly2<T, K> = any
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P]
+} & {
+  [P in keyof T as P extends K ? never : P]: T[P]
+}
 
 /* _____________ 테스트 케이스 _____________ */
 import type { Alike, Expect } from '@type-challenges/utils'

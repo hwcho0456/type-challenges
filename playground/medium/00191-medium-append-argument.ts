@@ -23,7 +23,9 @@
 
 /* _____________ 여기에 코드 입력 _____________ */
 
-type AppendArgument<Fn, A> = any
+type AppendArgument<Fn, A> =
+  Fn extends (...args: infer Args) => infer R ?
+      (...args: [...Args, A]) => R : never
 
 /* _____________ 테스트 케이스 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
