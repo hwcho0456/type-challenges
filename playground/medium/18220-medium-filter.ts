@@ -5,7 +5,7 @@
 
   ### 질문
 
-  Implement the type `Filter<T, Predicate>` takes an Array `T`, primitive type or union primitive type `Predicate` and returns an Array include the elements of `Predicate`.
+  원시 타입 또는 유니온 원시 타입인 `Predicate`과 `Predicate`의 요소로 포함되는 배열을 반환하고, 배열 `T`를 가지는 `Filter<T, Predicate>` 타입을 구현하세요.
 
   > GitHub에서 보기: https://tsch.js.org/18220/ko
 */
