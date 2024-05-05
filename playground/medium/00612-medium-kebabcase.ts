@@ -24,8 +24,16 @@
 
 /* _____________ 여기에 코드 입력 _____________ */
 
-type KebabCase<S> = any
+type KebabCase<S extends string, IsFirst extends boolean = true> =
+  S extends `${infer First}${infer Rest}`
+    ? Lowercase<First> extends First
+      ? `${Lowercase<First>}${KebabCase<Rest, false>}`
+      : IsFirst extends true
+        ? `${Lowercase<First>}${KebabCase<Rest, false>}`
+        : `-${Lowercase<First>}${KebabCase<Rest, false>}`
+    : S
 
+type A = KebabCase<'foo-bar'>
 /* _____________ 테스트 케이스 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 

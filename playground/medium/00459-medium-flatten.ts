@@ -18,7 +18,12 @@
 
 /* _____________ 여기에 코드 입력 _____________ */
 
-type Flatten = any
+type Flatten<Arr extends unknown[], Acc extends unknown[] = []> =
+  Arr extends [infer First, ...infer Rest]
+    ? First extends unknown[]
+      ? Flatten<[...First, ...Rest], Acc>
+      : Flatten<[...Rest], [...Acc, First]>
+    : Acc
 
 /* _____________ 테스트 케이스 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

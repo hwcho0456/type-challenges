@@ -21,9 +21,18 @@
   > GitHub에서 보기: https://tsch.js.org/949/ko
 */
 
+import type { Falsy } from 'utility-types'
+
 /* _____________ 여기에 코드 입력 _____________ */
 
-type AnyOf<T extends readonly any[]> = any
+type AnyOf<T extends readonly any[]> =
+  T extends [infer First, ...infer Rest]
+    ? First extends Falsy | []
+      ? AnyOf<Rest>
+      : keyof First extends never
+        ? AnyOf<Rest>
+        : true
+    : false
 
 /* _____________ 테스트 케이스 _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
